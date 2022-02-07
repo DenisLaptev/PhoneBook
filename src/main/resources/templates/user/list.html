@@ -30,11 +30,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="userModel:${modelsList}">
+        <tr th:each="user:${modelsList}">
 
-            <td th:text="${userModel.id}"></td>
-            <td th:text="${userModel.name}"></td>
-            <td th:text="${userModel.phonesString}"></td>
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.phonesString}"></td>
             <td>
                 Edit, Delete
             </td>

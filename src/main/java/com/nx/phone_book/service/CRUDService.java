@@ -1,21 +1,20 @@
 package com.nx.phone_book.service;
 
-import org.springframework.data.repository.CrudRepository;
-
 import java.util.List;
 
-public interface CRUDService<E, K> {
+//Service works with domain objects (persistent objects are encapsulated inside service)
 
-    void create(E entity);
+//D - domain(ui) type
+//K - id type
+public interface CRUDService<D, K> {
 
-    E findById(K id);
+    void create(D obj);
 
-    List<E> findAll();
+    D findById(K id);
 
-    E update(E entity);
+    List<D> findAll();
 
-    void delete(E entity);
+    D update(D obj);
 
-    CrudRepository<E, K> getRepository();
-
+    void delete(D obj);
 }

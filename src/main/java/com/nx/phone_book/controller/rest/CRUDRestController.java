@@ -1,61 +1,64 @@
 package com.nx.phone_book.controller.rest;
 
-/**
- * @author Denys Laptiev
- * Date: 11/8/2021
- */
-
 import com.nx.phone_book.service.CRUDService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @author Denys Laptiev
+ * Date: 2/7/2022
+ */
 
+//RestController works with domain objects (persistent objects are encapsulated inside service)
+
+//D - domain(ui) type
+//K - id type
 @RestController
-public abstract class CRUDRestController<E, K> {
+public abstract class CRUDRestController<D, K> {
 
-    abstract CRUDService<E, K> getService();
+    abstract CRUDService<D, K> getService();
 
     @PostMapping
-    public ResponseEntity<E> create(@RequestBody E entity) {
+    public ResponseEntity<D> create(@RequestBody D obj) {
 
-        getService().create(entity);
-        return ResponseEntity.ok(entity);
+        getService().create(obj);
+        return ResponseEntity.ok(obj);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<E> findById(@PathVariable K id) {
+    public ResponseEntity<D> findById(@PathVariable K id) {
 
-        E entity = getService().findById(id);
+        D obj = getService().findById(id);
 
-        if (entity == null) {
+        if (obj == null) {
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok(entity);
+        return ResponseEntity.ok(obj);
     }
 
     @GetMapping
-    public ResponseEntity<List<E>> findAll() {
+    public ResponseEntity<List<D>> findAll() {
 
-        List<E> entities = getService().findAll();
-        return ResponseEntity.ok(entities);
+        List<D> objs = getService().findAll();
+        return ResponseEntity.ok(objs);
     }
 
     @PutMapping
-    public ResponseEntity<E> update(@RequestBody E entity){
+    public ResponseEntity<D> update(@RequestBody D obj){
 
-        E updatedEntity = getService().update(entity);
-        return ResponseEntity.ok(updatedEntity);
+        D updatedObj = getService().update(obj);
+        return ResponseEntity.ok(updatedObj);
     }
 
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable K id) throws Exception {
 
-        E entityForDelete = getService().findById(id);
-        getService().delete(entityForDelete);
+        D objForDelete = getService().findById(id);
+        getService().delete(objForDelete);
         return ResponseEntity.noContent().build();
     }
 

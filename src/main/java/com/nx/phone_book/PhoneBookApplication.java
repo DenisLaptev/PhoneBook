@@ -5,14 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author Denys Laptiev
- * Date: 12/14/2021
+ * Date: 1/17/2022
  */
-
 @SpringBootApplication
 public class PhoneBookApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(PhoneBookApplication.class, args);
     }
-
 }
